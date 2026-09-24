@@ -1,0 +1,938 @@
+, <!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaunchScale | B2B Sales Strategy & Revenue Engine Execution</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        tealPrimary: '#0E525E',
+                        tealDark: '#08373F',
+                        tealLight: '#186F7E',
+                        orangeAccent: '#F17022',
+                        orangeHover: '#D95E14',
+                        bgLight: '#F8FAFC',
+                        textDark: '#0F172A'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8FAFC;
+            color: #0F172A;
+            overflow-x: hidden;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #0E525E 0%, #F17022 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-gradient {
+            background: radial-gradient(circle at 80% 20%, rgba(241, 112, 34, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 20% 80%, rgba(14, 82, 94, 0.1) 0%, transparent 50%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+        .modal-backdrop {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(4px);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-orangeAccent selection:text-white">
+
+    <!-- NAVIGATION BAR -->
+    <header class="fixed top-0 left-0 right-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/80 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-tealPrimary flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                        </svg>
+                    </div>
+                    <span class="text-2xl font-extrabold tracking-tight text-tealPrimary">
+                        Launch<span class="text-orangeAccent">Scale</span>
+                    </span>
+                </a>
+
+                <!-- Desktop Nav Links -->
+                <nav class="hidden lg:flex items-center gap-8">
+                    <a href="#method" class="text-sm font-medium text-slate-700 hover:text-orangeAccent transition-colors">Method</a>
+                    <a href="#services" class="text-sm font-medium text-slate-700 hover:text-orangeAccent transition-colors">Core Services</a>
+                    <a href="#proof" class="text-sm font-medium text-slate-700 hover:text-orangeAccent transition-colors">Sector Impact</a>
+                    <a href="#about" class="text-sm font-medium text-slate-700 hover:text-orangeAccent transition-colors">About</a>
+                    <a href="#blog" class="text-sm font-medium text-slate-700 hover:text-orangeAccent transition-colors">Insights & News</a>
+                    <a href="#contact" class="text-sm font-medium text-slate-700 hover:text-orangeAccent transition-colors">Contact</a>
+                </nav>
+
+                <!-- Action CTAs -->
+                <div class="hidden sm:flex items-center gap-3">
+                    <button onclick="openModal('intakeModal')" class="px-4 py-2.5 text-xs sm:text-sm font-semibold text-tealPrimary border border-tealPrimary/30 rounded-xl hover:bg-tealPrimary hover:text-white transition-all duration-200">
+                        Intake Form
+                    </button>
+                    <button onclick="openModal('calendlyModal')" class="px-5 py-2.5 text-xs sm:text-sm font-semibold text-white bg-orangeAccent rounded-xl shadow-md hover:bg-orangeHover hover:shadow-lg transition-all duration-200 transform hover:-translate-y-0.5">
+                        Book Audit
+                    </button>
+                </div>
+
+                <!-- Mobile Hamburger Button -->
+                <div class="flex lg:hidden">
+                    <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="p-2 rounded-lg text-slate-600 hover:text-tealPrimary hover:bg-slate-100 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path id="menuIcon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 space-y-3 shadow-xl">
+            <a href="#method" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium text-slate-700 hover:text-orangeAccent">Method</a>
+            <a href="#services" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium text-slate-700 hover:text-orangeAccent">Core Services</a>
+            <a href="#proof" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium text-slate-700 hover:text-orangeAccent">Sector Impact</a>
+            <a href="#about" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium text-slate-700 hover:text-orangeAccent">About</a>
+            <a href="#blog" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium text-slate-700 hover:text-orangeAccent">Insights & News</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium text-slate-700 hover:text-orangeAccent">Contact</a>
+            <div class="pt-4 flex flex-col gap-2">
+                <button onclick="toggleMobileMenu(); openModal('intakeModal');" class="w-full py-3 text-center text-sm font-semibold text-tealPrimary border border-tealPrimary/30 rounded-xl">
+                    Fill 2-Min Intake Form
+                </button>
+                <button onclick="toggleMobileMenu(); openModal('calendlyModal');" class="w-full py-3 text-center text-sm font-semibold text-white bg-orangeAccent rounded-xl shadow-md">
+                    Book 30-Min Audit
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-20">
+        <!-- SECTION 1: HERO SECTION -->
+        <section class="relative py-20 lg:py-28 hero-gradient overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-tealPrimary/10 border border-tealPrimary/20 text-tealPrimary text-xs sm:text-sm font-semibold">
+                            <span class="w-2 h-2 rounded-full bg-orangeAccent animate-pulse"></span>
+                            B2B Revenue & Sales Strategy for Growth-Stage Companies
+                        </div>
+
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-tealPrimary leading-tight tracking-tight">
+                            Transition from Founder-Led Selling to a <span class="gradient-text">Predictable Engine</span>
+                        </h1>
+
+                        <p class="text-lg sm:text-xl text-slate-6xl max-w-2xl text-slate-600 font-normal leading-relaxed mx-auto lg:mx-0">
+                            We help HealthTech, Commercial Services, and B2B SaaS founders eliminate sales bottlenecks, build repeatable playbooks, and scale enterprise revenue with fractional executive leadership.
+                        </p>
+
+                        <div class="pt-4 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                            <button onclick="openModal('calendlyModal')" class="px-8 py-4 text-base font-bold text-white bg-orangeAccent rounded-xl shadow-xl hover:bg-orangeHover hover:shadow-2xl transition-all duration-200 transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                                <span>Book 30-Min Growth Audit</span>
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            </button>
+                            <button onclick="openModal('intakeModal')" class="px-8 py-4 text-base font-bold text-tealPrimary bg-white border border-slate-300 rounded-xl shadow-sm hover:border-tealPrimary hover:bg-slate-50 transition-all duration-200 flex items-center justify-center gap-2">
+                                <span>Fill 2-Min Intake Form</span>
+                            </button>
+                        </div>
+
+                        <!-- Trust Badges -->
+                        <div class="pt-8 border-t border-slate-200/80 grid grid-cols-3 gap-4 text-center lg:text-left">
+                            <div>
+                                <div class="text-2xl sm:text-3xl font-extrabold text-tealPrimary">$45M+</div>
+                                <div class="text-xs sm:text-sm font-medium text-slate-500">Pipeline Generated</div>
+                            </div>
+                            <div>
+                                <div class="text-2xl sm:text-3xl font-extrabold text-tealPrimary">90-Day</div>
+                                <div class="text-xs sm:text-sm font-medium text-slate-500">Execution Sprint</div>
+                            </div>
+                            <div>
+                                <div class="text-2xl sm:text-3xl font-extrabold text-tealPrimary">3.2x</div>
+                                <div class="text-xs sm:text-sm font-medium text-slate-500">Average Win Rate Boost</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Visual Graphic Card -->
+                    <div class="lg:col-span-5 relative">
+                        <div class="relative mx-auto max-w-md lg:max-w-none glass-card rounded-3xl p-6 sm:p-8 shadow-2xl border border-slate-200/80 space-y-6">
+                            <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-3 h-3 rounded-full bg-rose-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-amber-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
+                                </div>
+                                <span class="text-xs font-semibold text-tealPrimary bg-tealPrimary/10 px-2.5 py-1 rounded-md">Live Sales Telemetry</span>
+                            </div>
+
+                            <div class="space-y-4">
+                                <div class="p-4 rounded-xl bg-tealPrimary text-white shadow-md">
+                                    <div class="text-xs text-teal-200 font-medium">Quarterly Target Attainment</div>
+                                    <div class="text-2xl font-bold mt-1 flex justify-between items-baseline">
+                                        <span>142%</span>
+                                        <span class="text-xs text-emerald-300 font-semibold">+38% vs Prior Quarter</span>
+                                    </div>
+                                    <div class="w-full bg-tealDark rounded-full h-2 mt-3">
+                                        <div class="bg-orangeAccent h-2 rounded-full" style="width: 85%"></div>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-2 gap-3">
+                                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                                        <div class="text-xs font-medium text-slate-500">Founder Selling Time</div>
+                                        <div class="text-xl font-bold text-slate-800 mt-1">75% → 12%</div>
+                                        <div class="text-[11px] text-emerald-600 font-medium mt-1">Delegated to Reps</div>
+                                    </div>
+                                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                                        <div class="text-xs font-medium text-slate-500">Sales Cycle Days</div>
+                                        <div class="text-xl font-bold text-slate-800 mt-1">110 → 48</div>
+                                        <div class="text-[11px] text-emerald-600 font-medium mt-1">56% Faster Close</div>
+                                    </div>
+                                </div>
+
+                                <div class="p-4 rounded-xl bg-slate-900 text-slate-100 space-y-2">
+                                    <div class="text-xs text-slate-400 font-mono">System Status: Active Playbook</div>
+                                    <div class="flex items-center gap-2 text-xs font-medium text-emerald-400">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                        Multi-Stakeholder HealthTech Buyer Map Deployed
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: PROBLEM & BOTTLENECKS -->
+        <section class="py-20 bg-white border-y border-slate-200/70">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto space-y-4">
+                    <h2 class="text-xs font-bold uppercase tracking-widest text-orangeAccent">The Growth Friction</h2>
+                    <p class="text-3xl sm:text-4xl font-extrabold text-tealPrimary">Is Your Sales Engine Stuck in Founder Dependency?</p>
+                    <p class="text-slate-600 text-base sm:text-lg">Most B2B startups hit a revenue ceiling around $1M–$5M ARR because closing enterprise deals still relies entirely on the founder's intuition.</p>
+                </div>
+
+                <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Bottleneck 1 -->
+                    <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-orangeAccent/50 hover:shadow-lg transition-all duration-300">
+                        <div class="w-12 h-12 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center font-bold text-xl mb-4">01</div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Founder Bottleneck</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">Deals stagnate whenever you step out of sales meetings because pitch knowledge isn't documented or repeatable.</p>
+                    </div>
+
+                    <!-- Bottleneck 2 -->
+                    <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-orangeAccent/50 hover:shadow-lg transition-all duration-300">
+                        <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center font-bold text-xl mb-4">02</div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Unpredictable Pipeline</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">Inconsistent lead intake creates feast-or-famine quarterly results, making headcount planning guesswork.</p>
+                    </div>
+
+                    <!-- Bottleneck 3 -->
+                    <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-orangeAccent/50 hover:shadow-lg transition-all duration-300">
+                        <div class="w-12 h-12 rounded-xl bg-tealPrimary/10 text-tealPrimary flex items-center justify-center font-bold text-xl mb-4">03</div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Complex Procurement</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">Deals slip past forecast dates due to unmapped procurement committees, security reviews, and financial sign-offs.</p>
+                    </div>
+
+                    <!-- Bottleneck 4 -->
+                    <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-orangeAccent/50 hover:shadow-lg transition-all duration-300">
+                        <div class="w-12 h-12 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-xl mb-4">04</div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Misaligned Rep Onboarding</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">New account executives take 6+ months to ramp up because they lack battle-tested battle cards and objection scripts.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: THE LAUNCHSCALE METHOD -->
+        <section id="method" class="py-20 bg-bgLight">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto space-y-4">
+                    <h2 class="text-xs font-bold uppercase tracking-widest text-orangeAccent">Proven Architecture</h2>
+                    <p class="text-3xl sm:text-4xl font-extrabold text-tealPrimary">The 3-Phase LaunchScale Revenue System</p>
+                    <p class="text-slate-600 text-base sm:text-lg">We don't just deliver advice—we embed directly into your sales organization to engineer and run your revenue machinery.</p>
+                </div>
+
+                <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+                    <!-- Phase 1 -->
+                    <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm relative space-y-4">
+                        <div class="inline-block px-3 py-1 rounded-full bg-tealPrimary text-white text-xs font-bold">Phase 01</div>
+                        <h3 class="text-2xl font-bold text-tealPrimary">FIX</h3>
+                        <p class="text-sm text-slate-500 font-medium">Audit & Diagnostic Sprint (Days 1–30)</p>
+                        <ul class="space-y-3 pt-2 text-sm text-slate-700">
+                            <li class="flex items-start gap-2">
+                                <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Deep audit of historic pipeline & conversion leaks</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Ideal Customer Profile (ICP) sharpening & tiering</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Pricing model & deal sizing optimization</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Phase 2 -->
+                    <div class="bg-white p-8 rounded-2xl border-2 border-orangeAccent shadow-md relative space-y-4 transform md:-translate-y-2">
+                        <div class="inline-block px-3 py-1 rounded-full bg-orangeAccent text-white text-xs font-bold">Phase 02</div>
+                        <h3 class="text-2xl font-bold text-tealPrimary">BUILD</h3>
+                        <p class="text-sm text-slate-500 font-medium">Playbook & CRM Architecture (Days 31–60)</p>
+                        <ul class="space-y-3 pt-2 text-sm text-slate-700">
+                            <li class="flex items-start gap-2">
+                                <svg class="w-5 h-5 text-orangeAccent shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Custom Enterprise Sales Playbook construction</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <svg class="w-5 h-5 text-orangeAccent shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>HubSpot/Salesforce stage & automation redesign</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <svg class="w-5 h-5 text-orangeAccent shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Buyer committee mapping & battle card creation</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Phase 3 -->
+                    <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm relative space-y-4">
+                        <div class="inline-block px-3 py-1 rounded-full bg-tealPrimary text-white text-xs font-bold">Phase 03</div>
+                        <h3 class="text-2xl font-bold text-tealPrimary">RUN</h3>
+                        <p class="text-sm text-slate-500 font-medium">Fractional VP Execution (Days 61–90+)</p>
+                        <ul class="space-y-3 pt-2 text-sm text-slate-700">
+                            <li class="flex items-start gap-2">
+                                <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Weekly deal review & pipeline rigor calls</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Rep coaching, ride-alongs & live negotiation support</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Hiring & onboarding playbook for permanent VP Sales</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: CORE SERVICES -->
+        <section id="services" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
+                    <div>
+                        <h2 class="text-xs font-bold uppercase tracking-widest text-orangeAccent">Engagement Models</h2>
+                        <p class="text-3xl sm:text-4xl font-extrabold text-tealPrimary mt-2">Modular Revenue Solutions</p>
+                    </div>
+                    <p class="text-slate-600 max-w-md text-sm sm:text-base">Tailored for teams at $500K to $10M ARR seeking structured commercial growth.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Service 1 -->
+                    <div class="p-8 rounded-2xl bg-bgLight border border-slate-200 flex flex-col justify-between hover:border-tealPrimary transition-all">
+                        <div class="space-y-4">
+                            <div class="text-sm font-bold text-orangeAccent uppercase tracking-wide">Short-Term Sprint</div>
+                            <h3 class="text-2xl font-bold text-tealPrimary">Rapid Sales Audit</h3>
+                            <p class="text-sm text-slate-600 leading-relaxed">A 2-week surgical deep dive into your CRM data, recorded sales calls, lost deals, and buyer interviews to pinpoint revenue leakage.</p>
+                            <div class="pt-4 border-t border-slate-200 space-y-2">
+                                <div class="text-xs font-bold text-slate-900 uppercase">Deliverables:</div>
+                                <div class="text-xs text-slate-600">• Full Funnel Diagnostic Report</div>
+                                <div class="text-xs text-slate-600">• Quick-Win Pipeline Action Plan</div>
+                                <div class="text-xs text-slate-600">• Executive Findings Workshop</div>
+                            </div>
+                        </div>
+                        <button onclick="openModal('calendlyModal')" class="mt-8 w-full py-3 text-sm font-bold text-tealPrimary bg-white border border-tealPrimary/30 rounded-xl hover:bg-tealPrimary hover:text-white transition-all">
+                            Book Audit Sprint
+                        </button>
+                    </div>
+
+                    <!-- Service 2 -->
+                    <div class="p-8 rounded-2xl bg-tealPrimary text-white flex flex-col justify-between shadow-xl relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-orangeAccent text-white text-[10px] font-extrabold uppercase px-3 py-1 rounded-bl-xl">Most Popular</div>
+                        <div class="space-y-4">
+                            <div class="text-sm font-bold text-orangeAccent uppercase tracking-wide">Core Program</div>
+                            <h3 class="text-2xl font-bold text-white">90-Day Playbook & CRM Build</h3>
+                            <p class="text-sm text-teal-100 leading-relaxed">Complete redesign of your sales motions. We craft your end-to-end enterprise playbook, battle cards, and optimize your CRM.</p>
+                            <div class="pt-4 border-t border-teal-800 space-y-2">
+                                <div class="text-xs font-bold text-white uppercase">Deliverables:</div>
+                                <div class="text-xs text-teal-100">• Custom Enterprise Sales Playbook</div>
+                                <div class="text-xs text-teal-100">• CRM Automation & Stage Mapping</div>
+                                <div class="text-xs text-teal-100">• Rep Training & Ramp Modules</div>
+                            </div>
+                        </div>
+                        <button onclick="openModal('intakeModal')" class="mt-8 w-full py-3 text-sm font-bold text-tealPrimary bg-orangeAccent text-white rounded-xl hover:bg-orangeHover transition-all shadow-md">
+                            Start 90-Day Build
+                        </button>
+                    </div>
+
+                    <!-- Service 3 -->
+                    <div class="p-8 rounded-2xl bg-bgLight border border-slate-200 flex flex-col justify-between hover:border-tealPrimary transition-all">
+                        <div class="space-y-4">
+                            <div class="text-sm font-bold text-orangeAccent uppercase tracking-wide">Embedded Leadership</div>
+                            <h3 class="text-2xl font-bold text-tealPrimary">Fractional VP of Sales</h3>
+                            <p class="text-sm text-slate-600 leading-relaxed">Hands-on executive sales leadership to run your weekly cadences, manage reps, refine forecast accuracy, and build your sales team.</p>
+                            <div class="pt-4 border-t border-slate-200 space-y-2">
+                                <div class="text-xs font-bold text-slate-900 uppercase">Deliverables:</div>
+                                <div class="text-xs text-slate-600">• Weekly Pipeline Management</div>
+                                <div class="text-xs text-slate-600">• Strategic Deal Coaching</div>
+                                <div class="text-xs text-slate-600">• Permanent VP Sales Search & Hiring</div>
+                            </div>
+                        </div>
+                        <button onclick="openModal('executiveModal')" class="mt-8 w-full py-3 text-sm font-bold text-tealPrimary bg-white border border-tealPrimary/30 rounded-xl hover:bg-tealPrimary hover:text-white transition-all">
+                            Inquire Executive Support
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: SECTOR IMPACT & CASE STUDIES -->
+        <section id="proof" class="py-20 bg-slate-900 text-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto space-y-4">
+                    <h2 class="text-xs font-bold uppercase tracking-widest text-orangeAccent">Proven Results</h2>
+                    <p class="text-3xl sm:text-4xl font-extrabold text-white">Sector Impact & Growth Acceleration</p>
+                    <p class="text-slate-400 text-base sm:text-lg">Real outcomes engineered for high-complexity B2B environments.</p>
+                </div>
+
+                <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Case Study 1 -->
+                    <div class="p-8 rounded-2xl bg-slate-800/80 border border-slate-700 space-y-4">
+                        <div class="text-xs font-semibold text-orangeAccent uppercase">HealthTech Enterprise</div>
+                        <h3 class="text-xl font-bold text-white">Scaling Hospital Procurement Deals</h3>
+                        <p class="text-sm text-slate-300">Helped a series A digital health company map multi-stakeholder clinical and IT committees.</p>
+                        <div class="pt-4 border-t border-slate-700/80 grid grid-cols-2 gap-4">
+                            <div>
+                                <div class="text-2xl font-extrabold text-emerald-400">2.8x</div>
+                                <div class="text-xs text-slate-400">Deal Size Growth</div>
+                            </div>
+                            <div>
+                                <div class="text-2xl font-extrabold text-emerald-400">45 Days</div>
+                                <div class="text-xs text-slate-400">Average Cycle Reduction</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Case Study 2 -->
+                    <div class="p-8 rounded-2xl bg-slate-800/80 border border-slate-700 space-y-4">
+                        <div class="text-xs font-semibold text-orangeAccent uppercase">Commercial Services</div>
+                        <h3 class="text-xl font-bold text-white">B2B Facility Management Tech</h3>
+                        <p class="text-sm text-slate-300">Transitioned founder-led sales into a 4-person outbound account executive team.</p>
+                        <div class="pt-4 border-t border-slate-700/80 grid grid-cols-2 gap-4">
+                            <div>
+                                <div class="text-2xl font-extrabold text-emerald-400">$2.4M</div>
+                                <div class="text-xs text-slate-400">New ARR Added</div>
+                            </div>
+                            <div>
+                                <div class="text-2xl font-extrabold text-emerald-400">100%</div>
+                                <div class="text-xs text-slate-400">Founder Selling Handoff</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Case Study 3 -->
+                    <div class="p-8 rounded-2xl bg-slate-800/80 border border-slate-700 space-y-4">
+                        <div class="text-xs font-semibold text-orangeAccent uppercase">Enterprise B2B SaaS</div>
+                        <h3 class="text-xl font-bold text-white">Compliance & Risk Software</h3>
+                        <p class="text-sm text-slate-300">Rebuilt CRM stages, lead scoring, and structured outbound SDR playbooks.</p>
+                        <div class="pt-4 border-t border-slate-700/80 grid grid-cols-2 gap-4">
+                            <div>
+                                <div class="text-2xl font-extrabold text-emerald-400">310%</div>
+                                <div class="text-xs text-slate-400">Pipeline Lift</div>
+                            </div>
+                            <div>
+                                <div class="text-2xl font-extrabold text-emerald-400">42%</div>
+                                <div class="text-xs text-slate-400">Higher Demo-to-Close</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: ABOUT / FOUNDER -->
+        <section id="about" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    <div class="lg:col-span-5 relative">
+                        <div class="relative rounded-3xl overflow-hidden bg-tealPrimary p-8 text-white space-y-6 shadow-xl">
+                            <div class="w-20 h-20 rounded-2xl bg-orangeAccent flex items-center justify-center font-bold text-3xl">
+                                LS
+                            </div>
+                            <blockquote class="text-lg italic font-light text-teal-100">
+                                "Growth stall isn't a product problem—it's almost always an execution and clarity problem in how deals are qualified, run, and closed."
+                            </blockquote>
+                            <div class="border-t border-teal-800 pt-4">
+                                <div class="font-bold text-white text-lg">Micheal Timperio, Senior Leadership Team</div>
+                                <div class="text-xs text-orangeAccent font-medium">B2B Revenue & Sales Execution Operators</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-7 space-y-6">
+                        <h2 class="text-xs font-bold uppercase tracking-widest text-orangeAccent">About LaunchScale</h2>
+                        <h3 class="text-3xl sm:text-4xl font-extrabold text-tealPrimary">Built by Practitioners, Not Slide-Deck Consultants</h3>
+                        <p class="text-slate-600 text-base leading-relaxed">
+                            At LaunchScale, we believe growth-stage founders shouldn't have to hire a $300k+ VP of Sales just to figure out if their commercial process works.
+                        </p>
+                        <p class="text-slate-600 text-base leading-relaxed">
+                            Our team brings decades of hands-on experience scaling revenue engines across HealthTech, Commercial B2B Services, and Enterprise Software. We partner directly with executive leadership to deploy battle-tested playbooks that create sustainable, enterprise-grade revenue momentum.
+                        </p>
+
+                        <div class="pt-2 flex flex-wrap gap-4">
+                            <div class="flex items-center gap-2 text-sm font-semibold text-slate-800">
+                                <svg class="w-5 h-5 text-orangeAccent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                Operator-Led
+                            </div>
+                            <div class="flex items-center gap-2 text-sm font-semibold text-slate-800">
+                                <svg class="w-5 h-5 text-orangeAccent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                90-Day Execution Sprints
+                            </div>
+                            <div class="flex items-center gap-2 text-sm font-semibold text-slate-800">
+                                <svg class="w-5 h-5 text-orangeAccent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                Predictable ROI Focus
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 7: BLOG & NEWS + NEWSLETTER -->
+        <section id="blog" class="py-20 bg-bgLight border-t border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto space-y-4">
+                    <h2 class="text-xs font-bold uppercase tracking-widest text-orangeAccent">Thought Leadership</h2>
+                    <p class="text-3xl sm:text-4xl font-extrabold text-tealPrimary">Insights & Company News</p>
+                    <p class="text-slate-600 text-base sm:text-lg">Tactical sales playbooks, growth strategy, and updates from the LaunchScale team.</p>
+                </div>
+
+                <!-- 3 Post Cards Grid -->
+                <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <!-- Card 1 -->
+                    <article class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
+                        <div class="p-6 space-y-4">
+                            <div class="flex items-center justify-between text-xs font-semibold">
+                                <span class="px-3 py-1 rounded-full bg-tealPrimary/10 text-tealPrimary uppercase tracking-wider">Insights</span>
+                                <div class="text-slate-400 flex items-center gap-2">
+                                    <span>Sep 2026</span>
+                                    <span>•</span>
+                                    <span>5 min read</span>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 hover:text-orangeAccent transition-colors">
+                                Moving Beyond Founder-Led Selling: The 90-Day Transition Framework
+                            </h3>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                How enterprise sales leaders structure playbooks to remove executive bottlenecks without sacrificing deal size.
+                            </p>
+                        </div>
+                        <div class="px-6 pb-6 pt-2">
+                            <button onclick="openArticleModal('Moving Beyond Founder-Led Selling: The 90-Day Transition Framework', 'How enterprise sales leaders structure playbooks to remove executive bottlenecks without sacrificing deal size. This framework establishes documented buyer personas, standardized sales scripts, and CRM deal-stage milestones that allow new reps to close complex deals autonomously.')" class="inline-flex items-center text-sm font-bold text-orangeAccent hover:text-orangeHover gap-1 group">
+                                <span>Read Playbook</span>
+                                <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- Card 2 -->
+                    <article class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
+                        <div class="p-6 space-y-4">
+                            <div class="flex items-center justify-between text-xs font-semibold">
+                                <span class="px-3 py-1 rounded-full bg-orangeAccent/10 text-orangeAccent uppercase tracking-wider">Case Study</span>
+                                <div class="text-slate-400 flex items-center gap-2">
+                                    <span>Aug 2026</span>
+                                    <span>•</span>
+                                    <span>4 min read</span>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 hover:text-orangeAccent transition-colors">
+                                Scaling HealthTech Procurement: Navigating Multi-Stakeholder Buying Committees
+                            </h3>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                A deep dive into mapping clinical, technical, and financial buyers across complex hospital network deals.
+                            </p>
+                        </div>
+                        <div class="px-6 pb-6 pt-2">
+                            <button onclick="openArticleModal('Scaling HealthTech Procurement: Navigating Multi-Stakeholder Buying Committees', 'Hospital procurement requires aligned messaging across CFOs, CIOs, and Chief Medical Officers. Learn how we built custom stakeholder consensus maps that reduced sales cycles by 45 days.')" class="inline-flex items-center text-sm font-bold text-orangeAccent hover:text-orangeHover gap-1 group">
+                                <span>Read Case Study</span>
+                                <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- Card 3 -->
+                    <article class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
+                        <div class="p-6 space-y-4">
+                            <div class="flex items-center justify-between text-xs font-semibold">
+                                <span class="px-3 py-1 rounded-full bg-slate-200 text-slate-700 uppercase tracking-wider">Company News</span>
+                                <div class="text-slate-400 flex items-center gap-2">
+                                    <span>Sep 2026</span>
+                                    <span>•</span>
+                                    <span>3 min read</span>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 hover:text-orangeAccent transition-colors">
+                                LaunchScale Expands Fractional Executive Offerings for Commercial Services
+                            </h3>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                Introducing modular 'Fix, Build, Run' engagement tiers designed for growth-stage B2B services firms.
+                            </p>
+                        </div>
+                        <div class="px-6 pb-6 pt-2">
+                            <button onclick="openArticleModal('LaunchScale Expands Fractional Executive Offerings for Commercial Services', 'LaunchScale is expanding its dedicated fractional CRO practice for commercial B2B services firms. Read about our new modular engagement packages.')" class="inline-flex items-center text-sm font-bold text-orangeAccent hover:text-orangeHover gap-1 group">
+                                <span>Read Announcement</span>
+                                <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            </button>
+                        </div>
+                    </article>
+
+                </div>
+
+                <!-- Embedded Newsletter Card Inside Section #blog -->
+                <div class="mt-16 bg-gradient-to-br from-tealPrimary to-tealDark rounded-3xl p-8 sm:p-12 text-white shadow-2xl relative overflow-hidden">
+                    <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-orangeAccent/10 rounded-full blur-3xl pointer-events-none"></div>
+                    
+                    <div class="max-w-3xl mx-auto text-center space-y-6 relative z-10">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 text-orangeAccent text-xs font-bold uppercase tracking-wider border border-white/10">
+                            Free Executive Newsletter
+                        </div>
+
+                        <h3 class="text-2xl sm:text-3xl font-extrabold leading-snug">
+                            The Revenue Operator: Weekly B2B sales playbooks and growth tactics delivered to your inbox
+                        </h3>
+
+                        <form onsubmit="handleNewsletterSubmit(event)" class="pt-2 flex flex-col sm:flex-row gap-3 max-w-xl mx-auto">
+                            <input 
+                                type="email" 
+                                required 
+                                placeholder="Enter your work email address..." 
+                                class="w-full px-5 py-4 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-orangeAccent placeholder:text-slate-400 text-sm font-medium shadow-inner"
+                            >
+                            <button 
+                                type="submit" 
+                                class="px-8 py-4 font-bold text-white bg-orangeAccent rounded-xl shadow-lg hover:bg-orangeHover transition-all shrink-0 hover:shadow-orangeAccent/30"
+                            >
+                                Subscribe Free
+                            </button>
+                        </form>
+
+                        <p class="text-xs text-teal-200">No spam. Unsubscribe anytime. Joined by 3,500+ B2B tech & services founders.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 8: FINAL CTA -->
+        <section id="contact" class="py-20 bg-tealPrimary text-white relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-8">
+                <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight">Ready to Systematize Your B2B Sales Engine?</h2>
+                <p class="text-lg text-teal-100 max-w-2xl mx-auto">Book a 30-minute growth audit or submit our 2-minute intake form to get a personalized revenue bottleneck analysis.</p>
+                
+                <div class="pt-4 flex flex-col sm:flex-row gap-4 justify-center">
+                    <button onclick="openModal('calendlyModal')" class="px-8 py-4 font-bold text-white bg-orangeAccent rounded-xl shadow-xl hover:bg-orangeHover transition-all transform hover:-translate-y-1">
+                        Book 30-Min Audit
+                    </button>
+                    <button onclick="openModal('intakeModal')" class="px-8 py-4 font-bold text-tealPrimary bg-white rounded-xl shadow-md hover:bg-slate-100 transition-all">
+                        Fill 2-Min Intake Form
+                    </button>
+                    <button onclick="openModal('executiveModal')" class="px-8 py-4 font-bold text-white border border-white/30 rounded-xl hover:bg-white/10 transition-all">
+                        Direct Executive Contact
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-slate-400 py-16 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+                <!-- Brand Info -->
+                <div class="md:col-span-5 space-y-4">
+                    <a href="#" class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-tealPrimary flex items-center justify-center text-white">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                        </div>
+                        <span class="text-xl font-extrabold text-white">Launch<span class="text-orangeAccent">Scale</span></span>
+                    </a>
+                    <p class="text-sm text-slate-400 max-w-sm">
+                        Fractional sales executive leadership and revenue architecture for HealthTech, Commercial Services, and B2B SaaS.
+                    </p>
+                </div>
+
+                <!-- Footer Quick Links -->
+                <div class="md:col-span-3 space-y-3 text-sm">
+                    <div class="font-bold text-white uppercase text-xs tracking-wider">Navigation</div>
+                    <ul class="space-y-2">
+                        <li><a href="#method" class="hover:text-white transition">Method</a></li>
+                        <li><a href="#services" class="hover:text-white transition">Core Services</a></li>
+                        <li><a href="#proof" class="hover:text-white transition">Sector Impact</a></li>
+                        <li><a href="#about" class="hover:text-white transition">About</a></li>
+                        <li><a href="#blog" class="hover:text-white transition">Insights & News</a></li>
+                    </ul>
+                </div>
+
+                <!-- Compact Footer Newsletter Form -->
+                <div class="md:col-span-4 space-y-3">
+                    <div class="font-bold text-white uppercase text-xs tracking-wider">The Revenue Operator</div>
+                    <p class="text-xs text-slate-400">Weekly B2B sales playbooks and growth tactics delivered to your inbox.</p>
+                    <form onsubmit="handleNewsletterSubmit(event)" class="flex gap-2">
+                        <input 
+                            type="email" 
+                            required 
+                            placeholder="Your work email..." 
+                            class="w-full px-3 py-2.5 rounded-lg bg-slate-800 text-white text-xs border border-slate-700 focus:outline-none focus:border-orangeAccent placeholder:text-slate-500"
+                        >
+                        <button type="submit" class="px-4 py-2.5 text-xs font-bold text-white bg-orangeAccent rounded-lg hover:bg-orangeHover transition shrink-0">
+                            Join
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 gap-4">
+                <div>&copy; 2026 LaunchScale Marketing & Revenue Strategy LLC. All rights reserved.</div>
+                <div class="flex gap-6">
+                    <a href="#" class="hover:text-slate-400">Privacy Policy</a>
+                    <a href="#" class="hover:text-slate-400">Terms of Service</a>
+                    <a href="#" class="hover:text-slate-400">Security</a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- MODAL 1: CALENDLY AUDIT EMBED MODAL -->
+    <div id="calendlyModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+        <div onclick="closeModal('calendlyModal')" class="absolute inset-0 modal-backdrop"></div>
+        <div class="relative bg-white w-full max-w-4xl h-[85vh] rounded-2xl shadow-2xl overflow-hidden flex flex-col z-10">
+            <div class="p-4 bg-tealPrimary text-white flex justify-between items-center">
+                <div class="font-bold text-sm sm:text-base flex items-center gap-2">
+                    <svg class="w-5 h-5 text-orangeAccent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    Schedule Your 30-Minute Revenue Growth Audit
+                </div>
+                <button onclick="closeModal('calendlyModal')" class="text-slate-300 hover:text-white p-1">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <div class="flex-1 w-full bg-slate-50">
+                <iframe src="https://calendly.com/launchscalemarketing/30min" class="w-full h-full border-0"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: ASYNC INTAKE FORM MODAL -->
+    <div id="intakeModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+        <div onclick="closeModal('intakeModal')" class="absolute inset-0 modal-backdrop"></div>
+        <div class="relative bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden z-10 p-6 sm:p-8 space-y-6">
+            <div class="flex justify-between items-center border-b border-slate-100 pb-4">
+                <div>
+                    <h3 class="text-xl font-bold text-tealPrimary">2-Minute Growth Intake</h3>
+                    <p class="text-xs text-slate-500">Get customized feedback on your commercial bottleneck.</p>
+                </div>
+                <button onclick="closeModal('intakeModal')" class="text-slate-400 hover:text-slate-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+
+            <form id="intakeForm" onsubmit="handleIntakeSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">1. Current ARR / Revenue Stage</label>
+                    <select required class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-tealPrimary">
+                        <option value="">Select revenue stage...</option>
+                        <option value="sub1m">Under $1M ARR</option>
+                        <option value="1to5m">$1M – $5M ARR</option>
+                        <option value="5to10m">$5M – $10M ARR</option>
+                        <option value="10mplus">$10M+ ARR</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">2. Primary Bottleneck</label>
+                    <select required class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-tealPrimary">
+                        <option value="">Select main friction point...</option>
+                        <option value="founder">Founder stuck in sales / cannot delegate</option>
+                        <option value="conversion">Low lead conversion / unmapped playbook</option>
+                        <option value="cycle">Long enterprise sales cycle & procurement delays</option>
+                        <option value="reps">Inconsistent Rep performance & onboarding</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">3. Your Work Email</label>
+                    <input type="email" required placeholder="name@company.com" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-tealPrimary">
+                </div>
+
+                <button type="submit" class="w-full py-4 text-sm font-bold text-white bg-orangeAccent rounded-xl hover:bg-orangeHover transition shadow-lg mt-2">
+                    Submit Intake & Request Analysis
+                </button>
+            </form>
+
+            <div id="intakeSuccess" class="hidden text-center space-y-4 py-6">
+                <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-2xl font-bold">✓</div>
+                <h4 class="text-xl font-bold text-tealPrimary">Intake Received!</h4>
+                <p class="text-sm text-slate-600">Our senior partner will review your inputs and reply within 24 hours.</p>
+                <button onclick="closeModal('intakeModal')" class="px-6 py-2.5 bg-slate-100 text-slate-700 font-semibold rounded-lg text-sm">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 3: DIRECT EXECUTIVE CONTACT MODAL -->
+    <div id="executiveModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+        <div onclick="closeModal('executiveModal')" class="absolute inset-0 modal-backdrop"></div>
+        <div class="relative bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden z-10 p-6 sm:p-8 space-y-6">
+            <div class="flex justify-between items-center border-b border-slate-100 pb-4">
+                <div>
+                    <h3 class="text-xl font-bold text-tealPrimary">Direct Executive Inquiry</h3>
+                    <p class="text-xs text-slate-500">Connect directly with a LaunchScale partner.</p>
+                </div>
+                <button onclick="closeModal('executiveModal')" class="text-slate-400 hover:text-slate-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+
+            <form onsubmit="handleExecutiveSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Full Name</label>
+                    <input type="text" required placeholder="Alex Morgan" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-tealPrimary">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Work Email</label>
+                    <input type="email" required placeholder="alex@company.com" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-tealPrimary">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Brief Note on Objectives</label>
+                    <textarea rows="3" required placeholder="Tell us about your team size and primary goals..." class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-tealPrimary"></textarea>
+                </div>
+                <button type="submit" class="w-full py-4 text-sm font-bold text-white bg-tealPrimary rounded-xl hover:bg-tealDark transition shadow-lg">
+                    Send Executive Message
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 4: NEWSLETTER CONFIRMATION MODAL -->
+    <div id="newsletterModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+        <div onclick="closeModal('newsletterModal')" class="absolute inset-0 modal-backdrop"></div>
+        <div class="relative bg-white w-full max-w-md rounded-2xl shadow-2xl overflow-hidden z-10 p-6 sm:p-8 text-center space-y-5">
+            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-3xl font-extrabold">
+                ✨
+            </div>
+            <h3 class="text-2xl font-extrabold text-tealPrimary">Subscription Confirmed!</h3>
+            <p class="text-sm font-semibold text-orangeAccent">Welcome to The Revenue Operator.</p>
+            <p class="text-sm text-slate-600 leading-relaxed">
+                You'll receive our upcoming edition packed with tactical B2B sales playbooks, buyer committee mapping frameworks, and growth tactics delivered straight to your inbox.
+            </p>
+            <button onclick="closeModal('newsletterModal')" class="w-full py-3 bg-tealPrimary text-white font-bold rounded-xl text-sm shadow-md hover:bg-tealDark transition">
+                Back to LaunchScale
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL 5: ARTICLE READ MODAL -->
+    <div id="articleModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+        <div onclick="closeModal('articleModal')" class="absolute inset-0 modal-backdrop"></div>
+        <div class="relative bg-white w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden z-10 p-6 sm:p-8 space-y-6">
+            <div class="flex justify-between items-start border-b border-slate-100 pb-4">
+                <h3 id="articleTitle" class="text-xl font-bold text-tealPrimary pr-6">Article Preview</h3>
+                <button onclick="closeModal('articleModal')" class="text-slate-400 hover:text-slate-600 shrink-0">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <div id="articleBody" class="text-sm text-slate-600 leading-relaxed space-y-4 max-h-[60vh] overflow-y-auto">
+                <!-- Content injected dynamically -->
+            </div>
+            <div class="pt-4 border-t border-slate-100 flex justify-end">
+                <button onclick="closeModal('articleModal')" class="px-6 py-2.5 bg-tealPrimary text-white font-bold rounded-xl text-sm">Close Preview</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            if (menu) {
+                menu.classList.toggle('hidden');
+            }
+        }
+
+        function handleNewsletterSubmit(e) {
+            e.preventDefault();
+            const form = e.target;
+            form.reset();
+            openModal('newsletterModal');
+        }
+
+        function handleIntakeSubmit(e) {
+            e.preventDefault();
+            document.getElementById('intakeForm').classList.add('hidden');
+            document.getElementById('intakeSuccess').classList.remove('hidden');
+        }
+
+        function handleExecutiveSubmit(e) {
+            e.preventDefault();
+            alert('Thank you for reaching out! A LaunchScale partner will respond to your email within 24 hours.');
+            closeModal('executiveModal');
+        }
+
+        function openArticleModal(title, bodyText) {
+            document.getElementById('articleTitle').innerText = title;
+            document.getElementById('articleBody').innerHTML = `<p>${bodyText}</p><p class="text-xs text-slate-400 italic">Full article published exclusively in "The Revenue Operator" weekly newsletter.</p>`;
+            openModal('articleModal');
+        }
+
+        // Close modal on Escape key press
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                ['calendlyModal', 'intakeModal', 'executiveModal', 'newsletterModal', 'articleModal'].forEach(id => closeModal(id));
+            }
+        });
+    </script>
+</body>
+</html>
